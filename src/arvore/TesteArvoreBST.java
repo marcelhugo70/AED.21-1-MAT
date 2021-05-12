@@ -23,6 +23,11 @@ public class TesteArvoreBST {
 		System.out.println(arvore.buscar(80));
 		System.out.println(arvore.buscar(57));
 		System.out.println(arvore.buscar(100));
+		arvore.retirar(58);
+		arvore.retirar(100);
+		arvore.retirar(13);
+		arvore.retirar(63);
+		System.out.println(arvore);
 	}
 
 }
