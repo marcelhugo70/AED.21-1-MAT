@@ -40,5 +40,13 @@ public class NoArvoreBST<T extends Comparable> extends NoArvoreBinaria<T> {
 		}
 
 	}
+
+	public NoArvoreBST<T> buscarMenor() {
+		if (this.getEsq() != null) {
+			return ((NoArvoreBST<T>)this.getEsq()).buscarMenor();
+		}
+		else 
+			return this;
+	}
 	
 }

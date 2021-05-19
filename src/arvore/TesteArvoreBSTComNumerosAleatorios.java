@@ -19,6 +19,10 @@ public class TesteArvoreBSTComNumerosAleatorios {
 			vetor[i] = numero;
 		}
 		System.out.println(arvore.toString());
+		System.out.println("Menor = "+arvore.menorElemento());
+		System.out.println("Menor = "+arvore.buscarMenor());
+		System.out.println("Maior = "+arvore.maiorElemento());
+		
 		int posicao;
 		for (int i=0; i < qtd; i++) {
 			posicao = r.nextInt(qtd);

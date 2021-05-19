@@ -57,6 +57,18 @@ public class NoArvoreBinaria<T> {
 		return str + ">";
 	}
 
+	public String imprimeCentral() {
+		String str =  "";
+		if (this.esq != null) {
+			str += this.esq.imprimeCentral(); // percorre sae
+		} 
+		str += this.info.toString()+", "; // trata raiz
+		if (this.dir != null) {
+			str += this.dir.imprimeCentral(); // percorre sad
+		} 
+		return str;
+	}
+
 	public NoArvoreBinaria<T> pertence(T procurado) {
 		if (this.info.equals(procurado)) { // tratar a raiz  
 			return this;

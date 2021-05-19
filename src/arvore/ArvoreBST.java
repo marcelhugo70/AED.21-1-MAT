@@ -83,26 +83,108 @@ public class ArvoreBST<T extends Comparable> extends ArvoreBinariaAbstract<T> {
 			return null;
 		}
 		NoArvoreBST<T> pai = (NoArvoreBST<T>) this.getRaiz();
-		while (pai!=null) {
+		while (pai != null) {
 			if (pai.getEsq() == filho || pai.getDir() == filho) {
 				return pai;
 			}
-			if (pai.getInfo().compareTo(filho.getInfo())>0) {
+			if (pai.getInfo().compareTo(filho.getInfo()) > 0) {
 				pai = (NoArvoreBST<T>) pai.getEsq();
-			}
-			else {
+			} else {
 				pai = (NoArvoreBST<T>) pai.getDir();
 			}
 		}
 		return null;
 	}
 
-	private NoArvoreBST<T> sucessor(NoArvoreBST<T> no) {
-		NoArvoreBST<T> sucessor = (NoArvoreBST<T>) no.getDir();
-		while (sucessor.getEsq() != null) {
-			sucessor = (NoArvoreBST<T>) sucessor.getEsq();
+	public NoArvoreBST<T> maiorElemento() {
+		if (this.vazia()) {
+			return null;
 		}
-		return sucessor;
+		NoArvoreBST<T> maior = (NoArvoreBST<T>) this.getRaiz();
+		while (maior.getDir() != null) {
+			maior = (NoArvoreBST<T>) maior.getDir();
+		}
+		return maior;
 	}
 
+	public NoArvoreBST<T> menorElemento() {
+		if (this.vazia()) {
+			return null;
+		}
+		NoArvoreBST<T> menor = (NoArvoreBST<T>) this.getRaiz();
+		while (menor.getEsq() != null) {
+			menor = (NoArvoreBST<T>) menor.getEsq();
+		}
+		return menor;
+	}
+
+	// uma segunda implementação para encontrar o menor. Esta usa recursividade nos
+	// NoArvoreBST.
+	public NoArvoreBST<T> buscarMenor() {
+		if (this.vazia()) {
+			return null;
+		}
+		return ((NoArvoreBST<T>) this.getRaiz()).buscarMenor();
+	}
+
+	public NoArvoreBST<T> antecessor(NoArvoreBST<T> no) {
+		if (this.vazia()) {
+			return null;
+		} else {
+			if (no.getEsq() != null) { // antecessor está abaixo dele
+				NoArvoreBST<T> antecessor = (NoArvoreBST<T>) no.getEsq();
+				while (antecessor.getDir() != null) {
+					antecessor = (NoArvoreBST<T>) antecessor.getDir();
+				}
+				return antecessor;
+			} else { // antecessor está acima dele
+				NoArvoreBST<T> antecessor = this.descobrirPai(no);
+				while (antecessor != null && antecessor.getInfo().compareTo(no.getInfo()) > 0) {
+					antecessor = this.descobrirPai(antecessor);
+				}
+				return antecessor;
+			}
+		}
+	}
+
+	public NoArvoreBST<T> sucessor(NoArvoreBST<T> no) {
+		if (this.vazia()) {
+			return null;
+		} else {
+			if (no.getDir() != null) { // sucessor está abaixo dele
+				NoArvoreBST<T> sucessor = (NoArvoreBST<T>) no.getDir();
+				while (sucessor.getEsq() != null) {
+					sucessor = (NoArvoreBST<T>) sucessor.getEsq();
+				}
+				return sucessor;
+			} else { // sucessor está acima dele
+				NoArvoreBST<T> sucessor = this.descobrirPai(no);
+				while (sucessor != null && sucessor.getInfo().compareTo(no.getInfo()) < 0) {
+					sucessor = this.descobrirPai(sucessor);
+				}
+				return sucessor;
+			}
+		}
+	}
+
+	
+	public String toStringOrdered() {
+		if (this.vazia()) {
+			return "";
+		}
+		return this.getRaiz().imprimeCentral();
+	}
+	
+	public String toStringOrdered2() {
+		if (this.vazia()) {
+			return "";
+		}
+		NoArvoreBST<T> sucessor = this.buscarMenor();
+		String s = "";
+		while (sucessor != null) {
+			s += sucessor.getInfo()+", ";
+			sucessor = this.sucessor(sucessor);
+		}
+		return s;
+	}
 }
