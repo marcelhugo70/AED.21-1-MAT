@@ -18,8 +18,8 @@ public class TesteArvoreNAria {
 
 		NoArvore<Integer> n2 = new NoArvore<Integer>(2);
 		n2.inserirFilho(n7);
-		n2.inserirFilho(n6);
-		n2.inserirFilho(n5);
+		n7.inserirFilho(n6);
+		n6.inserirFilho(n5);
 
 		NoArvore<Integer> n1 = new NoArvore<Integer>(1);
 		n1.inserirFilho(n4);
@@ -36,6 +36,14 @@ public class TesteArvoreNAria {
 
 		System.out.println("Buscando o 20 = "+a.pertence(20));
 		
-
+		System.out.println("Grau do 2="+a.getGrau(2));
+		System.out.println("Grau do 20="+a.getGrau(20));
+		System.out.println("Grau do 10="+a.getGrau(10));
+		System.out.println("Grau da árvore a="+a.getGrauArvore());
+		System.out.println("Altura da árvore a="+a.getAltura());
+		
+		Arvore<String> b = new Arvore<>();
+		System.out.println("Grau da árvore b="+b.getGrauArvore());
+		System.out.println("Altura da árvore b="+b.getAltura());
 	}
 }

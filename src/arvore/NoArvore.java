@@ -21,12 +21,12 @@ public class NoArvore<T> {
 		String str = "<" + this.info; // trata raiz
 		if (this.getFilho() != null) {
 			str += this.getFilho().imprimirPre();
-		} 
-		str +=  ">";
+		}
+		str += ">";
 		if (this.getIrmao() != null) {
 			str += this.getIrmao().imprimirPre();
 		}
-		return str ;
+		return str;
 	}
 
 	public void inserirFilho(NoArvore<T> noAInserir) {
@@ -45,7 +45,7 @@ public class NoArvore<T> {
 			noProcurado = this.getFilho().pertence(procurado);
 		}
 		if (noProcurado == null && this.getIrmao() != null) {
-			noProcurado =  this.getIrmao().pertence(procurado);
+			noProcurado = this.getIrmao().pertence(procurado);
 		}
 		return noProcurado;
 	}
@@ -64,6 +64,54 @@ public class NoArvore<T> {
 
 	public void setIrmao(NoArvore<T> irmao) {
 		this.irmao = irmao;
+	}
+
+	public int getGrau() {
+		int retorno = 0;
+		if (this.getFilho() == null) {// nenhum filho
+			return retorno;
+		} else {
+			retorno++;
+			NoArvore<T> outro = this.getFilho();
+			while (outro.getIrmao() != null) {// conta quantos irmãos
+				retorno++;
+				outro = outro.getIrmao();
+			}
+		}
+		return retorno;
+	}
+
+	public int getGrauSubarvore() {
+		int grau = this.getGrau(); // contador do maior
+		if (this.getFilho() != null) { // percorre filhos
+			int j = this.getFilho().getGrauSubarvore();
+			if (j > grau) {
+				grau = j;
+			}
+		}
+		if (this.getIrmao() != null) {// percorre irmao
+			int j = this.getIrmao().getGrauSubarvore();
+			if (j > grau) {
+				grau = j;
+			}
+		}
+		return grau;
+	}
+
+	public int getAlturaSubarvore() {
+		int alturaMaxima = 0;
+		if (this.getFilho() != null) {
+			alturaMaxima++;
+			int i = this.getFilho().getAlturaSubarvore();
+			alturaMaxima = alturaMaxima + i;
+		}
+		if (this.getIrmao() != null) {
+			int i = this.getIrmao().getAlturaSubarvore();
+			if (i > alturaMaxima) {
+				alturaMaxima = i;
+			}
+		}
+		return alturaMaxima;
 	}
 
 	@Override

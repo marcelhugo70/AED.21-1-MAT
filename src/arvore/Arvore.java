@@ -31,4 +31,30 @@ public class Arvore<T> {
 		}
 		return this.getRaiz().pertence(info);
 	}
+
+	public int getGrau(T info) {
+		NoArvore<T> noInfo = null;
+		noInfo = this.pertence(info);
+		if (noInfo != null) {
+			return noInfo.getGrau();
+		} else {
+			return -1;
+		}
+	}
+
+	public int getGrauArvore() {
+		if (vazia()) {
+			return -1;
+		}
+		return raiz.getGrauSubarvore();
+	}
+
+	public int getAltura() {
+		// altura da arvore
+		if (vazia()) {
+			return -1;
+		}
+		return (raiz.getAlturaSubarvore());
+	}
+
 }
