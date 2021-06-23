@@ -6,6 +6,9 @@ public class Veiculo implements Comparable<Veiculo>{
 	private int ano;
 	private String proprietario;
 
+	public Veiculo() {
+	}
+	
 	public Veiculo(String placa, String modelo, int ano, String proprietario) {
 		super();
 		this.placa = placa;
@@ -14,7 +17,6 @@ public class Veiculo implements Comparable<Veiculo>{
 		this.proprietario = proprietario;
 	}
 
-//Obrigado :)
 	public String getPlaca() {
 		return placa;
 	}
